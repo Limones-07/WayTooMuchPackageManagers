@@ -17,22 +17,20 @@ SRC_FILES := $(shell find $(SRC_DIR) -type f -name '*.c')
 # Object files
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 
-# Dependency files
-DEP_FILES := $(OBJ_FILES:.o=.d)
-
 # Targets
 all: $(PROJECT_NAME)
+	@echo "$(PROJECT_NAME) compiled!"
 
 $(PROJECT_NAME): $(OBJ_FILES)
+	@echo "Linking object files..."
 	$(CC) $(LDFLAGS) $^ -o $@
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
+	@echo "Compiling source code into object files..."
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(BUILD_DIR) $(PROJECT_NAME)
-
--include $(DEP_FILES)
 
 .PHONY: all clean
