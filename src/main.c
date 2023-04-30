@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "config_lib/config.h"
-// #include "config_lib/info.h"
+#include "config/config.h"
+// #include "config/info.h"
 
 int main(int argc, char *argv[])
 {
