@@ -1,10 +1,10 @@
 # Compiler options
 CC := gcc
-CFLAGS := -Wall -Wextra -pedantic -Ofast -MMD -march=native -funroll-loops -fomit-frame-pointer -flto
+CFLAGS := -Wall -Wextra -pedantic -Ofast -MMD -march=native -flto
 LDFLAGS := -flto -s
 
 # Project name
-HEADER_FILE := src/config_lib/info.h
+HEADER_FILE := src/config/info.h
 PROJECT_NAME := $(shell grep '#define PROJECT_NAME' $(HEADER_FILE) | cut -d '"' -f 2)
 
 # Directories
