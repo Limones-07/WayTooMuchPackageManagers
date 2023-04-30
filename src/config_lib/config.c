@@ -11,7 +11,6 @@ void get_config_home(char **pConfigHome)
         unsigned int size = strlen(configHome);
         *pConfigHome = (char*) realloc(*pConfigHome, size);
         *pConfigHome = configHome;
-        free(configHome);
     }
     else
     {
@@ -29,9 +28,30 @@ void get_config_home(char **pConfigHome)
     }
 }
 
-void get_config_info(char *pConfigInfo, int buffersize)
+void get_config_info(int *package_managers, char **pConfigInfo, char *configFileName)
 {
-    char *configHome = calloc(1, sizeof(char));
-    get_config_home(&configHome);
+    char *configFilePath = malloc(sizeof(char));
+    {
+        char *configHome = calloc(1, sizeof(char));
+        get_config_home(&configHome);
+        configFilePath = realloc(configFilePath, strlen(configHome) + strlen(PROJECT_NAME) + strlen(configFileName) + 1);
+        configFilePath = strcpy(configFilePath, configHome);
+        configFilePath = strcat(configFilePath, "/");
+        configFilePath = strcat(configFilePath, PROJECT_NAME);
+        configFilePath = strcat(configFilePath, "/");
+        configFilePath = strcat(configFilePath, configFileName);
+        free(configHome);
+    }
+
+    // printf("%s\n", configFilePath);
+
+    FILE *pConfigFile = fopen(configFilePath, "r");
+    if (pConfigFile == NULL)
+    {
+        puts("Coudn't find the config file! Exiting!");
+        exit(1);
+    }
     
+
+    fclose(pConfigFile);
 }

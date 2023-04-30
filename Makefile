@@ -1,7 +1,7 @@
 # Compiler options
 CC := gcc
-CFLAGS := -Wall -Wextra -pedantic -Ofast -MMD -pthread -march=native -funroll-loops -fomit-frame-pointer -flto
-LDFLAGS := -flto
+CFLAGS := -Wall -Wextra -pedantic -Ofast -MMD -march=native -funroll-loops -fomit-frame-pointer -flto
+LDFLAGS := -flto -s
 
 # Project name
 HEADER_FILE := src/config_lib/info.h
@@ -29,6 +29,8 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	@echo "Compiling source code into object files..."
 	$(CC) $(CFLAGS) -c $< -o $@
+
+-include $(OBJS:.o=.d)
 
 clean:
 	rm -rf $(BUILD_DIR) $(PROJECT_NAME)
