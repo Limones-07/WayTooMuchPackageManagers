@@ -28,7 +28,17 @@ void get_config_home(char **pConfigHome)
     }
 }
 
-void get_config_info(int *package_managers, char **pConfigInfo, char *configFileName)
+void read_package_managers(char **pLine, unsigned char *package_managers)
+{
+    if (pLine[0] != '|')
+    {
+        return;
+    }
+
+    
+}
+
+void get_package_managers(int *package_managers, char *configFileName)
 {
     char *configFilePath = malloc(sizeof(char));
     {
@@ -51,7 +61,20 @@ void get_config_info(int *package_managers, char **pConfigInfo, char *configFile
         puts("Coudn't find the config file! Exiting!");
         exit(1);
     }
-    
+
+    char *pLine = calloc(100, sizeof(char));
+    while (fscanf(pConfigFile, "%100s", NULL) != "package_managers")
+    {
+        continue;
+    }
+
+    unsigned char package_managers = 0b0;
+    while (fscanf(pConfigFile, "%100s", pLine) != EOF)
+    {
+        if (pLine[0] == '#') continue;
+
+        read_package_managers(&pLine, &package_managers);
+    }
 
     fclose(pConfigFile);
 }

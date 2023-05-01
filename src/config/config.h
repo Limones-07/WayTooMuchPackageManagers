@@ -3,15 +3,15 @@
 
 typedef enum PackageManagers
 {
-    apt = 1, 
-    dnf = 2,
-    pacman = 4,
-    xbps = 8,
-    // pip = 16,
-    // cargo = 32,
-    // node = 64
+    apt = 0b1, 
+    dnf = 0b10,
+    pacman = 0b100,
+    xbps = 0b1000
+    // pip = 0b10000,
+    // cargo = 0b100000,
+    // node = 0b10000000
 } PackageManagers;
 
-void get_config_info(int *package_managers, char **pConfigInfo, char *configFileName);
+void get_package_managers(int *package_managers, char *configFileName);
 
 #endif

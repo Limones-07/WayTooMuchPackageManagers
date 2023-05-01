@@ -4,13 +4,11 @@
 #include "config/config.h"
 // #include "config/info.h"
 
-int main(int argc, char *argv[])
+int main()
 {
     const char SUPPORTED_PACKAGE_MANAGERS[][10] = {"apt", "dnf", "pacman", "xbps", "pip", "cargo", "node"};
     printf("Hello, World!\n");
-    int package_managers;
-    char *config_info = calloc(1, sizeof(char));
-    get_config_info(&package_managers, &config_info, "config");
+    unsigned char package_managers;
+    get_package_managers(&package_managers, "config");
 
-    // for (int i = 0; i < )
 }
